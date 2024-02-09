@@ -1,3 +1,3 @@
 #!/usr/bin/env node
 "use strict";
-console.log(process.argv0);
+console.log(process.argv);
