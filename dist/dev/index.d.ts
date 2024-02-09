@@ -1,3 +1,2 @@
-export interface API {
-}
+export {};
 //# sourceMappingURL=index.d.ts.map
