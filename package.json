@@ -3,9 +3,7 @@
   "version": "1.0.0",
   "description": "New typescript project",
   "main": "dist/index.js",
-  "scripts": {
-    "dev": "node dist/dev-script"
-  },
+  "bin": "node dist/dev-script",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/TuncayBasak25/humpback.git"
