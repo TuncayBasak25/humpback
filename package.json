@@ -4,7 +4,7 @@
   "description": "New typescript project",
   "main": "dist/index.js",
   "bin": {
-    "humpback-auto-dev": "node dist/dev-script"
+    "hb": "./dist/bin/hb.js"
   },
   "repository": {
     "type": "git",
