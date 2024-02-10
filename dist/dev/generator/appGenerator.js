@@ -27,7 +27,7 @@ class AppGenerator {
     }
     startGeneration() {
         return __awaiter(this, void 0, void 0, function* () {
-            const baseFolder = yield file_system_1.Folder.open(__dirname, "..", "..", "..", "base");
+            const baseFolder = yield file_system_1.Folder.open(__dirname, "..", "..", "..", "auto");
             yield this.humpbackFolder;
             yield this.modulesFolder;
             yield this.servicesFolder;

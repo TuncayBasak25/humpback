@@ -19,7 +19,7 @@ export class AppGenerator {
     private constructor(public readonly appFolder: Folder, public readonly root: boolean = false) {}
 
     private async startGeneration() {
-        const baseFolder = await Folder.open(__dirname, "..", "..", "..", "base");
+        const baseFolder = await Folder.open(__dirname, "..", "..", "..", "auto");
 
         await this.humpbackFolder;
         await this.modulesFolder;

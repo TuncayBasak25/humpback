@@ -1,0 +1,45 @@
+import { Request, Response, NextFunction, Application } from "express";
+
+import { server } from "./server";
+
+export {server};
+
+export interface IController {
+
+    req: Request;
+    res: Response;
+    next: NextFunction;
+
+    all?(): void;
+    get?(): void;
+    post?(): void;
+    put?(): void;
+    patch?(): void;
+    delete?(): void;
+
+    /**
+     * This can be used as getHouse(): void; so the route /house would be intercepted hear.
+     */
+    all__url__?(): void;
+    get__url__?(): void;
+    post__url__?(): void;
+    put__url__?(): void;
+    patch__url__?(): void;
+    delete__url__?(): void;
+}
+
+export class HB implements IController {
+    static app: Application = server;
+    
+    static new(req: Request, res: Response, next: NextFunction): any {
+        return new this(req, res, next);
+    }
+    
+    public constructor(
+        public req: Request,
+        public res: Response,
+        public next: NextFunction
+    ) {
+        (this as any)[req.method]();
+    }
+}

@@ -1,0 +1,45 @@
+import express, { Application, Router, Request, Response, NextFunction } from "express";
+import { Folder } from "file-system";
+
+export const server = express();
+
+setRouters();
+
+
+async function setRouters(router?: Router, appFolder?: Folder) {
+    appFolder = appFolder || await Folder.open(process.cwd(), "dist", "app");
+
+    const contFile = await appFolder.hasFile("controller.js");
+
+    if (!contFile) throw new Error("Controller file is missing! At server file of " + appFolder.name);
+
+    const { Controller } = await contFile.require();
+
+    const myRouter = Router();
+
+    for (const protoName of Object.keys(Controller.prototype)) {
+        const [method, url] = split_method_url(protoName);
+
+        myRouter[method](url, Controller.new);
+    }
+
+
+    (router || server).use(router ? appFolder.name : "/", myRouter);
+
+    const modulesFolder = await appFolder.hasFolder("modules");
+
+    if (!modulesFolder) return;
+    
+    for (const moduleFolder of await modulesFolder.folderList) setRouters(myRouter, moduleFolder);
+}
+
+type Method = "all" | "get" | "post" | "put" | "patch" | "delete";
+
+function split_method_url(text: string): [Method, string] {
+    text = text.toLocaleLowerCase();
+    const match = text.match(/(all|get|post|put|patch|delete)/i);
+
+    if (!match || match.index) throw new Error(`This is not a valid method for Controller! method: ${text} | Should start by http method`);
+
+    return [match[0] as Method, text.replace(match[0], "") || "/"];
+}
