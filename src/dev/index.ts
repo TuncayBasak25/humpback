@@ -1,4 +1,5 @@
 import sleep from "sleep";
+import prompt from "prompt-sync"
 import { AppGenerator } from "./generator/appGenerator";
 import Terminal from "terminal";
 
