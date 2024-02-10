@@ -28,6 +28,23 @@ export class AppGenerator {
         baseFolder.openFile("controller").then(contFile => contFile.copy(this.appFolder.path, "controller.ts"));
 
         baseFolder.openFile("humpback").then(hbFile => hbFile.copy(this.appFolder.path, "humpback", "index.ts"));
+
+        (await this.servicesFolder).watcher.on("change", async () => {
+            const hbFile = await baseFolder.openFile("humpback", "index.ts");
+
+            const hbCopy = await hbFile.copy(this.appFolder.path, "humpback", "index.ts");
+
+            let imports = "";
+            let implementation = "";
+
+            for (const serviceFile of await (await this.servicesFolder).fileList) {
+                const serviceType = serviceFile.name.slice(0, 1).toUpperCase() + serviceFile.name.slice(-1);
+                implementation += `public readonly ${serviceFile.basename}: ${serviceType} = new ${serviceType}();\n`;
+                imports += `import { ${serviceType} } from "../services/${serviceFile.basename}";`;
+            }
+
+            await hbCopy.write((await hbCopy.read()).replace("//imports//", imports).replace("//implementation//", implementation));
+        })
     }
 
     public get humpbackFolder(): Promise<Folder> {

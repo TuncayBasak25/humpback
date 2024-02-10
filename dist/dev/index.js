@@ -13,7 +13,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const sleep_1 = __importDefault(require("sleep"));
-const prompt_sync_1 = __importDefault(require("prompt-sync"));
 const appGenerator_1 = require("./generator/appGenerator");
 const terminal_1 = __importDefault(require("terminal"));
 (function () {
@@ -24,7 +23,7 @@ const terminal_1 = __importDefault(require("terminal"));
         const nodemon = new terminal_1.default();
         nodemon.run("nodemon");
         while (true) {
-            const input = (0, prompt_sync_1.default)("Waiting your commad");
+            const input = prompt("Waiting your commad");
             console.log("You have written" + input);
             yield (0, sleep_1.default)(10);
         }
