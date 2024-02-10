@@ -1,5 +1,8 @@
-import express, { Application, Router, Request, Response, NextFunction } from "express";
+import { HTTPMethod } from "humpback";
+
+import express, { Router } from "express";
 import { Folder } from "file-system";
+
 
 export const server = express();
 
@@ -18,9 +21,16 @@ async function setRouters(router?: Router, appFolder?: Folder) {
     const myRouter = Router();
 
     for (const protoName of Object.keys(Controller.prototype)) {
-        const [method, url] = split_method_url(protoName);
+        const text = protoName.toLocaleLowerCase();
 
-        myRouter[method](url.replace(/$/g, "/:").replace(/_/g, "/"), Controller.new);
+        const match = text.match(/(all|get|post|put|patch|delete)/i);
+
+        if (match && !match.index) {
+            const method = match[0] as HTTPMethod;
+            const url = text.replace(match[0], "").replace(/$/g, "/:").replace(/_/g, "/") || "/";
+
+            myRouter[method](url, (...args: any[]) => Controller.new(...args, protoName));
+        }
     }
 
 
@@ -31,15 +41,4 @@ async function setRouters(router?: Router, appFolder?: Folder) {
     if (!modulesFolder) return;
     
     for (const moduleFolder of await modulesFolder.folderList) setRouters(myRouter, moduleFolder);
-}
-
-type Method = "all" | "get" | "post" | "put" | "patch" | "delete";
-
-function split_method_url(text: string): [Method, string] {
-    text = text.toLocaleLowerCase();
-    const match = text.match(/(all|get|post|put|patch|delete)/i);
-
-    if (!match || match.index) throw new Error(`This is not a valid method for Controller! method: ${text} | Should start by http method`);
-
-    return [match[0] as Method, text.replace(match[0], "") || "/"];
 }

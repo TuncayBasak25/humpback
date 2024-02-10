@@ -20,9 +20,10 @@ export class HB {
     public constructor(
         public req: Request,
         public res: Response,
-        public next: NextFunction
+        public next: NextFunction,
+        method: string
     ) {
-        (this as any)[req.method]();
+        (this as any)[method]();
     }
 
 }

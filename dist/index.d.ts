@@ -1,3 +1,4 @@
 import { IController } from "./interfaces/controller";
-export { IController };
+import { HTTPMethod } from "./types/httpMethod";
+export { IController, HTTPMethod };
 //# sourceMappingURL=index.d.ts.map

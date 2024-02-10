@@ -1,0 +1,1 @@
+export type HTTPMethod = "all" | "get" | "post" | "put" | "patch" | "delete";
