@@ -1,34 +1,80 @@
 import { File, Folder } from "file-system";
-import { routeFile } from "./file-generators";
 
 
 export class AppGenerator {
     
 
-    public static async new(appFolderPath: string): Promise<AppGenerator> {
+    public static async new(appFolderPath?: string): Promise<AppGenerator> {
 
-        const appFolder = await Folder.open(appFolderPath);
+        const appFolder = await (appFolderPath ? Folder.open(appFolderPath) : Folder.open(process.cwd(), "src", "app"));
 
-        const humpbackFolder = await appFolder.openFolder("humpback");
-        const moduleFolder = await appFolder.openFolder("modules");
-        const serviceFolder = await appFolder.openFolder("services");
+        const appGenerator = new AppGenerator(appFolder);
 
-        const appGenerator = new AppGenerator(appFolder, humpbackFolder, moduleFolder, serviceFolder, await routeFile(appFolder));
+        appGenerator.startGeneration();
 
         return appGenerator;
     }
 
     public implementationList: string[] = [];
 
-    private constructor(
-        public readonly appFolder: Folder,
-        public readonly humpbackFolder: Folder,
-        public readonly moduleFolder: Folder,
-        public readonly serviceFolder: Folder,
-        public readonly controllerFile: File
-    ) {}
+    private constructor(public readonly appFolder: Folder) {}
 
-    getImplementations(fileText: string) {
+    private async startGeneration() {
+        this.generateRouterFile();
 
+        this.generateHumpbackFile();  
+    }
+
+    public get humpbackFolder(): Promise<Folder> {
+        return this.appFolder.openFolder("humpback");
+    }
+
+    public get modulesFolder(): Promise<Folder> {
+        return this.appFolder.openFolder("modules");
+    }
+
+    public get servicesFolder(): Promise<Folder> {
+        return this.appFolder.openFolder("services");
+    }
+
+    public get routerFile(): Promise<File> {
+        return this.appFolder.openFile("router.ts");
+    }
+
+    public get humpbackFile(): Promise<File> {
+        return this.appFolder.openFile("humpback/router.ts");
+    }
+
+
+    async generateRouterFile() {
+        await (await this.routerFile).write(`
+import { HB } from "./humback";
+
+export class Home extends HB {
+
+    get() {
+        this.res.send("Hello");
+    }
+}
+`);
+    }
+
+    async generateHumpbackFile() {
+        await (await this.humpbackFile).write(`
+
+import { Request, Response, NextFunction } from "express";
+
+export class HB {
+    
+    public constructor(
+        public method: "all" | "get" | "put" | "post" | "patch" | "delete"
+        public req: Request,
+        public res: Response,
+        public next: NextFunction
+    ) {
+        (this as any)[this.method]();
+    }
+}
+`);
     }
 }

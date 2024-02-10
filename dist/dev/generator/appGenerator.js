@@ -11,27 +11,73 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppGenerator = void 0;
 const file_system_1 = require("file-system");
-const file_generators_1 = require("./file-generators");
 class AppGenerator {
     static new(appFolderPath) {
         return __awaiter(this, void 0, void 0, function* () {
-            const appFolder = yield file_system_1.Folder.open(appFolderPath);
-            const humpbackFolder = yield appFolder.openFolder("humpback");
-            const moduleFolder = yield appFolder.openFolder("modules");
-            const serviceFolder = yield appFolder.openFolder("services");
-            const appGenerator = new AppGenerator(appFolder, humpbackFolder, moduleFolder, serviceFolder, yield (0, file_generators_1.routeFile)(appFolder));
+            const appFolder = yield (appFolderPath ? file_system_1.Folder.open(appFolderPath) : file_system_1.Folder.open(process.cwd(), "src", "app"));
+            const appGenerator = new AppGenerator(appFolder);
+            appGenerator.startGeneration();
             return appGenerator;
         });
     }
-    constructor(appFolder, humpbackFolder, moduleFolder, serviceFolder, controllerFile) {
+    constructor(appFolder) {
         this.appFolder = appFolder;
-        this.humpbackFolder = humpbackFolder;
-        this.moduleFolder = moduleFolder;
-        this.serviceFolder = serviceFolder;
-        this.controllerFile = controllerFile;
         this.implementationList = [];
     }
-    getImplementations(fileText) {
+    startGeneration() {
+        return __awaiter(this, void 0, void 0, function* () {
+            this.generateRouterFile();
+            this.generateHumpbackFile();
+        });
+    }
+    get humpbackFolder() {
+        return this.appFolder.openFolder("humpback");
+    }
+    get modulesFolder() {
+        return this.appFolder.openFolder("modules");
+    }
+    get servicesFolder() {
+        return this.appFolder.openFolder("services");
+    }
+    get routerFile() {
+        return this.appFolder.openFile("router.ts");
+    }
+    get humpbackFile() {
+        return this.appFolder.openFile("humpback/router.ts");
+    }
+    generateRouterFile() {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield (yield this.routerFile).write(`
+import { HB } from "./humback";
+
+export class Home extends HB {
+
+    get() {
+        this.res.send("Hello");
+    }
+}
+`);
+        });
+    }
+    generateHumpbackFile() {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield (yield this.humpbackFile).write(`
+
+import { Request, Response, NextFunction } from "express";
+
+export class HB {
+    
+    public constructor(
+        public method: "all" | "get" | "put" | "post" | "patch" | "delete"
+        public req: Request,
+        public res: Response,
+        public next: NextFunction
+    ) {
+        (this as any)[this.method]();
+    }
+}
+`);
+        });
     }
 }
 exports.AppGenerator = AppGenerator;
