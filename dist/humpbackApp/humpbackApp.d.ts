@@ -1,5 +1,4 @@
 import { Application } from "express";
-export declare const server: import("express-serve-static-core").Express;
 export declare class HumpbackApp {
     static create({ port, callBack }?: {
         port: string | number;

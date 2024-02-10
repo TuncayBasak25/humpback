@@ -32,10 +32,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.HumpbackApp = exports.server = void 0;
+exports.HumpbackApp = void 0;
 const express_1 = __importStar(require("express"));
 const file_system_1 = require("file-system");
-exports.server = (0, express_1.default)();
 class HumpbackApp {
     static create({ port, callBack } = { port: process.env.PORT || 3000, callBack: () => console.log("Humpback app started.") }) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -73,7 +72,7 @@ class HumpbackApp {
                     myRouter[method](url, (...args) => new Controller(...args, protoName));
                 }
             }
-            (router || exports.server).use(router ? appFolder.name : "/", myRouter);
+            (router || this.expressServer).use(router ? appFolder.name : "/", myRouter);
             const modulesFolder = yield appFolder.hasFolder("modules");
             if (!modulesFolder)
                 return;

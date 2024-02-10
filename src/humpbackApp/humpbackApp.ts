@@ -3,9 +3,6 @@ import { HTTPMethod } from "../types/httpMethod";
 import express, { Application, Router } from "express";
 import { Folder } from "file-system";
 
-
-export const server = express();
-
 export class HumpbackApp {
 
     static async create({ port, callBack }: { port: string | number, callBack: () => void } = { port: process.env.PORT || 3000, callBack: () => console.log("Humpback app started.") }) {
@@ -56,7 +53,7 @@ export class HumpbackApp {
         }
 
 
-        (router || server).use(router ? appFolder.name : "/", myRouter);
+        (router || this.expressServer).use(router ? appFolder.name : "/", myRouter);
 
         const modulesFolder = await appFolder.hasFolder("modules");
 
