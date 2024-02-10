@@ -37,7 +37,7 @@ const express_1 = __importStar(require("express"));
 const file_system_1 = require("file-system");
 exports.server = (0, express_1.default)();
 class HumpbackApp {
-    static create({ port = process.env.PORT || 3000, callBack = () => console.log("Humpback app started.") }) {
+    static create({ port, callBack } = { port: process.env.PORT || 3000, callBack: () => console.log("Humpback app started.") }) {
         return __awaiter(this, void 0, void 0, function* () {
             const app = new HumpbackApp();
             yield app.setRouters();

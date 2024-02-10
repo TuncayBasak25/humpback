@@ -8,7 +8,7 @@ export const server = express();
 
 export class HumpbackApp {
 
-    static async create({ port = process.env.PORT || 3000, callBack = () => console.log("Humpback app started.") }: { port: string | number, callBack: () => void }) {
+    static async create({ port, callBack }: { port: string | number, callBack: () => void } = { port: process.env.PORT || 3000, callBack: () => console.log("Humpback app started.") }) {
         const app = new HumpbackApp();
 
         await app.setRouters();
