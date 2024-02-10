@@ -1,4 +1,4 @@
-import path from "path";
+import sleep from "sleep";
 import { AppGenerator } from "./generator/appGenerator";
 import Terminal from "terminal";
 
@@ -12,4 +12,12 @@ import Terminal from "terminal";
     const nodemon = new Terminal();
 
     nodemon.run("nodemon");
+
+    while (true) {
+        const input = prompt("Waiting your commad");
+
+        console.log("You have written" + input);
+        
+        await sleep(10);
+    }
 })()
