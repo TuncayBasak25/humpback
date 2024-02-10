@@ -43,7 +43,7 @@ class AppGenerator {
                     implementation += `public readonly ${serviceFile.basename}: ${serviceType} = new ${serviceType}();\n`;
                     imports += `import { ${serviceType} } from "../services/${serviceFile.basename}";`;
                 }
-                const hbCopy = yield this.appFolder.openFile("humpback", "index.ts");
+                const hbCopy = yield (yield this.humpbackFolder).openFile("index.ts");
                 yield hbCopy.write((yield hbCopy.read()).replace("//imports//", imports).replace("//implementation//", implementation));
             }));
         });
