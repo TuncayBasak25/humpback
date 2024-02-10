@@ -20,6 +20,8 @@ export class AppGenerator {
     private constructor(public readonly appFolder: Folder) {}
 
     private async startGeneration() {
+        await this.humpbackFolder;
+        
         this.generateRouterFile();
 
         this.generateHumpbackFile();  
