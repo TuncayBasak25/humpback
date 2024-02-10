@@ -20,7 +20,7 @@ async function setRouters(router?: Router, appFolder?: Folder) {
     for (const protoName of Object.keys(Controller.prototype)) {
         const [method, url] = split_method_url(protoName);
 
-        myRouter[method](url, Controller.new);
+        myRouter[method](url.replace(/$/g, "/:").replace(/_/g, "/"), Controller.new);
     }
 
 
