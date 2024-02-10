@@ -14,7 +14,7 @@ export interface IController {
      * }
      * 
      * Following the method name separation by _ for intercepting sub routes.
-     * You can use $ for intercepting queries.
+     * You can use $ for intercepting params.
      * 
      * @example
      * all_login(): void {
@@ -36,7 +36,7 @@ export interface IController {
      * }
      * 
      * Following the method name separation by _ for intercepting sub routes.
-     * You can use $ for intercepting queries.
+     * You can use $ for intercepting params.
      * 
      * @example
      * get_login(): void {
@@ -58,7 +58,7 @@ export interface IController {
      * }
      * 
      * Following the method name separation by _ for intercepting sub routes.
-     * You can use $ for intercepting queries.
+     * You can use $ for intercepting params.
      * 
      * @example
      * post_login(): void {
@@ -80,7 +80,7 @@ export interface IController {
      * }
      * 
      * Following the method name separation by _ for intercepting sub routes.
-     * You can use $ for intercepting queries.
+     * You can use $ for intercepting params.
      * 
      * @example
      * put_login(): void {
@@ -102,7 +102,7 @@ export interface IController {
      * }
      * 
      * Following the method name separation by _ for intercepting sub routes.
-     * You can use $ for intercepting queries.
+     * You can use $ for intercepting params.
      * 
      * @example
      * patch_login(): void {
@@ -124,7 +124,7 @@ export interface IController {
      * }
      * 
      * Following the method name separation by _ for intercepting sub routes.
-     * You can use $ for intercepting queries.
+     * You can use $ for intercepting params.
      * 
      * @example
      * delete_login(): void {

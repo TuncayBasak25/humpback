@@ -1,4 +1,5 @@
+import { HumpbackApp } from "./humpbackApp/humpbackApp";
 import { IController } from "./interfaces/controller";
-import { HTTPMethod } from "./types/httpMethod";
-export { IController, HTTPMethod };
+export default HumpbackApp;
+export { IController, };
 //# sourceMappingURL=index.d.ts.map

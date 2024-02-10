@@ -1,7 +1,8 @@
+import { HumpbackApp } from "./humpbackApp/humpbackApp";
 import { IController } from "./interfaces/controller";
-import { HTTPMethod } from "./types/httpMethod";
+
+export default HumpbackApp;
 
 export {
     IController,
-    HTTPMethod
 }

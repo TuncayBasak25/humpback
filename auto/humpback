@@ -3,19 +3,9 @@ import { Request, Response, NextFunction, Application } from "express";
 import { IController } from "humpback";
 
 
-
-import { server } from "./server";
-export { server };
-
-
 export interface HB extends IController { }
 
 export class HB {
-    static app: Application = server;
-
-    static new(req: Request, res: Response, next: NextFunction): any {
-        return new this(req, res, next);
-    }
 
     public constructor(
         public req: Request,
