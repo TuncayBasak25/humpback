@@ -39,7 +39,7 @@ class AppGenerator {
                 let imports = "";
                 let implementation = "";
                 for (const serviceFile of yield (yield this.servicesFolder).fileList) {
-                    const serviceType = serviceFile.name.slice(0, 1).toUpperCase() + serviceFile.name.slice(-1);
+                    const serviceType = serviceFile.basename.slice(0, 1).toUpperCase() + serviceFile.basename.slice(-1);
                     implementation += `public readonly ${serviceFile.basename}: ${serviceType} = new ${serviceType}();\n`;
                     imports += `import { ${serviceType} } from "../services/${serviceFile.basename}";`;
                 }
