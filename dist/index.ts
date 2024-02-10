@@ -1,5 +1,5 @@
-import { Controller } from "./interfaces/controller";
+import { IController } from "./interfaces/controller";
 
 export {
-    Controller
+    IController
 }

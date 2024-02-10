@@ -1,3 +1,3 @@
-import { Controller } from "./interfaces/controller";
-export { Controller };
+import { IController } from "./interfaces/controller";
+export { IController };
 //# sourceMappingURL=index.d.ts.map

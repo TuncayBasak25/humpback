@@ -1,12 +1,12 @@
 import { Request, Response, NextFunction, Application } from "express";
 
-import { Controller } from "humpback";
+import { IController } from "humpback";
 
 import { server } from "./server";
 
 export {server};
 
-export class HB implements Controller {
+export class HB implements IController {
     static app: Application = server;
     
     static new(req: Request, res: Response, next: NextFunction): any {
