@@ -1,6 +1,7 @@
 import { File, Folder } from "file-system";
 export declare class AppGenerator {
     readonly appFolder: Folder;
+    readonly root: boolean;
     static new(appFolderPath?: string): Promise<AppGenerator>;
     implementationList: string[];
     private constructor();
@@ -10,7 +11,6 @@ export declare class AppGenerator {
     get servicesFolder(): Promise<Folder>;
     get routerFile(): Promise<File>;
     get humpbackFile(): Promise<File>;
-    generateRouterFile(): Promise<void>;
-    generateHumpbackFile(): Promise<void>;
+    get serverFile(): Promise<File>;
 }
 //# sourceMappingURL=appGenerator.d.ts.map

@@ -15,20 +15,26 @@ class AppGenerator {
     static new(appFolderPath) {
         return __awaiter(this, void 0, void 0, function* () {
             const appFolder = yield (appFolderPath ? file_system_1.Folder.open(appFolderPath) : file_system_1.Folder.open(process.cwd(), "src", "app"));
-            const appGenerator = new AppGenerator(appFolder);
+            const appGenerator = new AppGenerator(appFolder, !appFolderPath);
             appGenerator.startGeneration();
             return appGenerator;
         });
     }
-    constructor(appFolder) {
+    constructor(appFolder, root = false) {
         this.appFolder = appFolder;
+        this.root = root;
         this.implementationList = [];
     }
     startGeneration() {
         return __awaiter(this, void 0, void 0, function* () {
+            const baseFolder = yield file_system_1.Folder.open(__dirname, "..", "..", "..", "base");
             yield this.humpbackFolder;
-            this.generateRouterFile();
-            this.generateHumpbackFile();
+            yield this.modulesFolder;
+            yield this.servicesFolder;
+            baseFolder.openFile("controller").then(contFile => contFile.copy(this.appFolder.path, "controller.ts"));
+            baseFolder.openFile("humpback").then(hbFile => hbFile.copy(this.appFolder.path, "humpback", "index.ts"));
+            if (this.root)
+                baseFolder.openFile("server").then(sFile => sFile.copy(this.appFolder.path, "humpback", "server.ts"));
         });
     }
     get humpbackFolder() {
@@ -41,44 +47,13 @@ class AppGenerator {
         return this.appFolder.openFolder("services");
     }
     get routerFile() {
-        return this.appFolder.openFile("router.ts");
+        return this.appFolder.openFile("controller.ts");
     }
     get humpbackFile() {
         return this.appFolder.openFile("humpback/index.ts");
     }
-    generateRouterFile() {
-        return __awaiter(this, void 0, void 0, function* () {
-            yield (yield this.routerFile).write(`
-import { HB } from "./humpback";
-
-export class Home extends HB {
-
-    get() {
-        this.res.send("Hello");
-    }
-}
-`);
-        });
-    }
-    generateHumpbackFile() {
-        return __awaiter(this, void 0, void 0, function* () {
-            yield (yield this.humpbackFile).write(`
-
-import { Request, Response, NextFunction } from "express";
-
-export class HB {
-    
-    public constructor(
-        public method: "all" | "get" | "put" | "post" | "patch" | "delete"
-        public req: Request,
-        public res: Response,
-        public next: NextFunction
-    ) {
-        (this as any)[this.method]();
-    }
-}
-`);
-        });
+    get serverFile() {
+        return this.appFolder.openFile("humpback/server.ts");
     }
 }
 exports.AppGenerator = AppGenerator;
