@@ -28,8 +28,6 @@ export class AppGenerator {
         baseFolder.openFile("controller").then(contFile => contFile.copy(this.appFolder.path, "controller.ts"));
 
         baseFolder.openFile("humpback").then(hbFile => hbFile.copy(this.appFolder.path, "humpback", "index.ts"));
-
-        if (this.root) baseFolder.openFile("server").then(sFile => sFile.copy(this.appFolder.path, "humpback", "server.ts"));
     }
 
     public get humpbackFolder(): Promise<Folder> {
