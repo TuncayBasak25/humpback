@@ -35,7 +35,7 @@ class AppGenerator {
             baseFolder.openFile("humpback").then(hbFile => hbFile.copy(this.appFolder.path, "humpback", "index.ts"));
             (yield this.servicesFolder).watcher.on("change", () => __awaiter(this, void 0, void 0, function* () {
                 const hbFile = yield baseFolder.openFile("humpback", "index.ts");
-                const hbCopy = yield hbFile.copy(this.appFolder.path, "humpback", "index.ts");
+                yield hbFile.copy(this.appFolder.path, "humpback", "index.ts");
                 let imports = "";
                 let implementation = "";
                 for (const serviceFile of yield (yield this.servicesFolder).fileList) {
@@ -43,6 +43,7 @@ class AppGenerator {
                     implementation += `public readonly ${serviceFile.basename}: ${serviceType} = new ${serviceType}();\n`;
                     imports += `import { ${serviceType} } from "../services/${serviceFile.basename}";`;
                 }
+                const hbCopy = yield this.appFolder.openFile("humpback", "index");
                 yield hbCopy.write((yield hbCopy.read()).replace("//imports//", imports).replace("//implementation//", implementation));
             }));
         });

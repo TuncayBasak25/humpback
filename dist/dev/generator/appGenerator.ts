@@ -32,7 +32,7 @@ export class AppGenerator {
         (await this.servicesFolder).watcher.on("change", async () => {
             const hbFile = await baseFolder.openFile("humpback", "index.ts");
 
-            const hbCopy = await hbFile.copy(this.appFolder.path, "humpback", "index.ts");
+            await hbFile.copy(this.appFolder.path, "humpback", "index.ts");
 
             let imports = "";
             let implementation = "";
@@ -42,6 +42,8 @@ export class AppGenerator {
                 implementation += `public readonly ${serviceFile.basename}: ${serviceType} = new ${serviceType}();\n`;
                 imports += `import { ${serviceType} } from "../services/${serviceFile.basename}";`;
             }
+
+            const hbCopy = await this.appFolder.openFile("humpback", "index")
 
             await hbCopy.write((await hbCopy.read()).replace("//imports//", imports).replace("//implementation//", implementation));
         })
