@@ -43,7 +43,7 @@ export class AppGenerator {
                 imports += `import { ${serviceType} } from "../services/${serviceFile.basename}";`;
             }
 
-            const hbCopy = await this.appFolder.openFile("humpback", "index")
+            const hbCopy = await this.appFolder.openFile("humpback", "index.ts")
 
             await hbCopy.write((await hbCopy.read()).replace("//imports//", imports).replace("//implementation//", implementation));
         })
