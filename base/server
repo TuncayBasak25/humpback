@@ -4,7 +4,7 @@ import { Folder } from "file-system";
 export const server = express();
 
 setRouters(server).then(() => {
-    server.listen(3000);
+    server.listen(3000, () => console.log("listening at 3000"));
 });
 
 async function setRouters(router?: Router, appFolder?: Folder) {
@@ -26,5 +26,5 @@ async function setRouters(router?: Router, appFolder?: Folder) {
 
     if (!modulesFolder) return;
     
-    for (moduleFolder of await modulesFolder.folderList) setRouters(myRouter, moduleFolder);
+    for (const moduleFolder of await modulesFolder.folderList) setRouters(myRouter, moduleFolder);
 }
