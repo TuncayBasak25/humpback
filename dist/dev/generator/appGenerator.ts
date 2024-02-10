@@ -21,7 +21,7 @@ export class AppGenerator {
 
     private async startGeneration() {
         await this.humpbackFolder;
-        
+
         this.generateRouterFile();
 
         this.generateHumpbackFile();  
@@ -44,13 +44,13 @@ export class AppGenerator {
     }
 
     public get humpbackFile(): Promise<File> {
-        return this.appFolder.openFile("humpback/router.ts");
+        return this.appFolder.openFile("humpback/index.ts");
     }
 
 
     async generateRouterFile() {
         await (await this.routerFile).write(`
-import { HB } from "./humback";
+import { HB } from "./humpback";
 
 export class Home extends HB {
 

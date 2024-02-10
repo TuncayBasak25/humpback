@@ -44,12 +44,12 @@ class AppGenerator {
         return this.appFolder.openFile("router.ts");
     }
     get humpbackFile() {
-        return this.appFolder.openFile("humpback/router.ts");
+        return this.appFolder.openFile("humpback/index.ts");
     }
     generateRouterFile() {
         return __awaiter(this, void 0, void 0, function* () {
             yield (yield this.routerFile).write(`
-import { HB } from "./humback";
+import { HB } from "./humpback";
 
 export class Home extends HB {
 
