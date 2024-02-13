@@ -1,20 +1,18 @@
 {
     "compilerOptions": {
-        "target": "ES2016",
-        "experimentalDecorators": true,
-        "emitDecoratorMetadata": true,
-        "module": "CommonJS",
-        "rootDir": "./src",
-        "outDir": "./dist",
+        "target": "es2016",
+        "module": "commonjs",
         "moduleResolution": "node",
         "resolveJsonModule": true,
         "allowJs": false,
-        "declaration": true,
-        "declarationMap": true,
         "esModuleInterop": true,
         "forceConsistentCasingInFileNames": true,
         "strict": true,
         "noImplicitAny": true,
         "allowSyntheticDefaultImports": true
-    }
+    },
+    "include": [
+        "./ts"
+    ],
+    "exclude": []
 }

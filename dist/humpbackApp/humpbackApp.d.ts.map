@@ -1,1 +1,0 @@
-{"version":3,"file":"humpbackApp.d.ts","sourceRoot":"","sources":["../../src/humpbackApp/humpbackApp.ts"],"names":[],"mappings":"AAEA,OAAgB,EAAE,WAAW,EAAU,MAAM,SAAS,CAAC;AAGvD,qBAAa,WAAW;WAEP,MAAM,CAAC,EAAE,IAAI,EAAE,QAAQ,EAAE,GAAE;QAAE,IAAI,EAAE,MAAM,GAAG,MAAM,CAAC;QAAC,QAAQ,EAAE,MAAM,IAAI,CAAA;KAA6F;IAiBlL,SAAgB,aAAa,EAAE,WAAW,CAAa;IACvD,OAAO;YAEO,UAAU;CAoC3B"}

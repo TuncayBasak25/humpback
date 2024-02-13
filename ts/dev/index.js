@@ -17,9 +17,6 @@ const terminal_1 = __importDefault(require("terminal"));
 (function () {
     return __awaiter(this, void 0, void 0, function* () {
         const appGenerator = yield appGenerator_1.AppGenerator.new();
-        const compiler = new terminal_1.default();
-        compiler.run("tsc -w");
-        const nodemon = new terminal_1.default();
-        nodemon.run("nodemon");
+        terminal_1.default.open("WCR").run("npx tscli wcr");
     });
 })();

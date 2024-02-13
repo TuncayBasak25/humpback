@@ -5,5 +5,6 @@ const args = process.argv.slice(-1);
 switch (args.shift()) {
     case "dev": require("../dev"); break;
 
-
+    default: console.log("To implement");
+    
 }
