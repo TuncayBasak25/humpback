@@ -14,7 +14,7 @@ const file_system_1 = require("file-system");
 class AppGenerator {
     static new(appFolderPath) {
         return __awaiter(this, void 0, void 0, function* () {
-            const appFolder = yield (appFolderPath ? file_system_1.Folder.open(appFolderPath) : file_system_1.Folder.open(process.cwd(), "src", "app"));
+            const appFolder = yield (appFolderPath ? file_system_1.Folder.open(appFolderPath) : file_system_1.Folder.open(process.cwd(), "ts", "app"));
             const appGenerator = new AppGenerator(appFolder, !appFolderPath);
             appGenerator.startGeneration();
             return appGenerator;

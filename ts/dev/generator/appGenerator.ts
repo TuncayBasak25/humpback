@@ -5,7 +5,7 @@ export class AppGenerator {
 
     public static async new(appFolderPath?: string): Promise<AppGenerator> {
 
-        const appFolder = await (appFolderPath ? Folder.open(appFolderPath) : Folder.open(process.cwd(), "src", "app"));
+        const appFolder = await (appFolderPath ? Folder.open(appFolderPath) : Folder.open(process.cwd(), "ts", "app"));
 
         const appGenerator = new AppGenerator(appFolder, !appFolderPath);
 
