@@ -4,7 +4,7 @@
   "description": "Typescript web app builder",
   "main": "ts/index.js",
   "bin": {
-    "hb": "./dist/bin/hb.js"
+    "hb": "./ts/bin/hb.js"
   },
   "repository": {
     "type": "git",
