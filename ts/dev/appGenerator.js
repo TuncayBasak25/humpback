@@ -97,6 +97,7 @@ class AppGenerator {
                     yield AppGenerator.new(subRouteFolder);
                 }
             }
+            this.routesFolder.watcher.once("change", () => this.generateRoutes());
         });
     }
     generateServices() {

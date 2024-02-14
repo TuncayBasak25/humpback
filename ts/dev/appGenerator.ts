@@ -108,10 +108,12 @@ export class AppGenerator {
 
     private async generateRoutes() {
         for (const subRouteFolder of await this.routesFolder.folderList) {
-            if (! await subRouteFolder.hasFile("controller.ts")) {
+            if (!await subRouteFolder.hasFile("controller.ts")) {
                 await AppGenerator.new(subRouteFolder);
             }
         }
+
+        this.routesFolder.watcher.once("change", () => this.generateRoutes());
     }
 
     private serviceImports = "";
