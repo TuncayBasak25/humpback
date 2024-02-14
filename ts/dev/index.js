@@ -12,11 +12,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const appGenerator_1 = require("./generator/appGenerator");
+const appGenerator_1 = require("./appGenerator");
 const terminal_1 = __importDefault(require("terminal"));
 (function () {
     return __awaiter(this, void 0, void 0, function* () {
-        const appGenerator = yield appGenerator_1.AppGenerator.new();
+        yield appGenerator_1.AppGenerator.new();
         terminal_1.default.open("WCR").run("npx tscli wcr");
     });
 })();
