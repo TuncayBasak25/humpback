@@ -32,7 +32,7 @@ export default class HumpbackApp {
     private constructor() { }
 
     private async setRouters(router?: Router, appFolder?: Folder) {
-        appFolder = appFolder || await Folder.open(process.cwd(), "dist", "app");
+        appFolder = appFolder || await Folder.open(process.cwd(), "ts", "app");
 
         const contFile = await appFolder.hasFile("controller.js");
 

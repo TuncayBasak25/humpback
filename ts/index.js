@@ -55,7 +55,7 @@ class HumpbackApp {
     }
     setRouters(router, appFolder) {
         return __awaiter(this, void 0, void 0, function* () {
-            appFolder = appFolder || (yield file_system_1.Folder.open(process.cwd(), "dist", "app"));
+            appFolder = appFolder || (yield file_system_1.Folder.open(process.cwd(), "ts", "app"));
             const contFile = yield appFolder.hasFile("controller.js");
             if (!contFile)
                 throw new Error("Controller file is missing! At server file of " + appFolder.name);
