@@ -72,7 +72,7 @@ class HumpbackApp {
                 }
             }
             (router || this.expressServer).use(router ? appFolder.name : "/", myRouter);
-            const modulesFolder = yield appFolder.hasFolder("modules");
+            const modulesFolder = yield appFolder.hasFolder("routes");
             if (!modulesFolder)
                 return;
             for (const moduleFolder of yield modulesFolder.folderList)
