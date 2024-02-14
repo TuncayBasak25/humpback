@@ -102,13 +102,7 @@ class AppGenerator {
     }
     generateServices() {
         return __awaiter(this, void 0, void 0, function* () {
-            const serviceList = [];
-            for (const entry of yield this.servicesFolder.entryList) {
-                if (entry instanceof file_system_1.File)
-                    serviceList.push(entry.basename);
-                else
-                    serviceList.push(entry.name);
-            }
+            const serviceList = (yield this.servicesFolder.entryList).map(entry => entry.basename);
             this.serviceImports = "";
             this.serviceImplementations = "";
             for (const serviceName of serviceList) {

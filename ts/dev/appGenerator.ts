@@ -120,11 +120,7 @@ export class AppGenerator {
     private serviceImplementations = "";
 
     private async generateServices() {
-        const serviceList = [];
-        for (const entry of await this.servicesFolder.entryList) {
-            if (entry instanceof File) serviceList.push(entry.basename);
-            else serviceList.push(entry.name);
-        }
+        const serviceList = (await this.servicesFolder.entryList).map(entry => entry.basename);
 
         this.serviceImports = "";
         this.serviceImplementations = "";
