@@ -9,7 +9,7 @@ export interface IController {
     /**
      * Endpoint functions must start by the name of the HTTP method case insensitive.
      * @example
-     * all(): void {
+     * all(): any {
      *     this.res.send("Hello");
      * }
      * 
@@ -17,21 +17,21 @@ export interface IController {
      * You can use $ for intercepting params.
      * 
      * @example
-     * all_login(): void {
+     * all_login(): any {
      *     this.auth.isLogged() && this.redirect(Home);
      * }
      * 
      * @example
-     * all_image$authid(): void {
+     * all_image$authid(): any {
      *     this.auth.isDenied() && this.redirect(DeniedRoute);
      * }
      */
-    all?(): void;
+    all?(): any;
 
     /**
      * Endpoint functions must start by the name of the HTTP method case insensitive.
      * @example
-     * get(): void {
+     * get(): any {
      *     this.res.send("Hello");
      * }
      * 
@@ -39,21 +39,21 @@ export interface IController {
      * You can use $ for intercepting params.
      * 
      * @example
-     * get_login(): void {
+     * get_login(): any {
      *     this.auth.isLogged() && this.redirect(Home);
      * }
      * 
      * @example
-     * get_image$authid(): void {
+     * get_image$authid(): any {
      *     this.auth.isDenied() && this.redirect(DeniedRoute);
      * }
      */
-    get?(): void;
+    get?(): any;
 
     /**
      * Endpoint functions must start by the name of the HTTP method case insensitive.
      * @example
-     * post(): void {
+     * post(): any {
      *     this.res.send("Hello");
      * }
      * 
@@ -61,21 +61,21 @@ export interface IController {
      * You can use $ for intercepting params.
      * 
      * @example
-     * post_login(): void {
+     * post_login(): any {
      *     this.auth.isLogged() && this.redirect(Home);
      * }
      * 
      * @example
-     * post_image$authid(): void {
+     * post_image$authid(): any {
      *     this.auth.isDenied() && this.redirect(DeniedRoute);
      * }
      */
-    post?(): void;
+    post?(): any;
 
     /**
      * Endpoint functions must start by the name of the HTTP method case insensitive.
      * @example
-     * put(): void {
+     * put(): any {
      *     this.res.send("Hello");
      * }
      * 
@@ -83,21 +83,21 @@ export interface IController {
      * You can use $ for intercepting params.
      * 
      * @example
-     * put_login(): void {
+     * put_login(): any {
      *     this.auth.isLogged() && this.redirect(Home);
      * }
      * 
      * @example
-     * put_image$authid(): void {
+     * put_image$authid(): any {
      *     this.auth.isDenied() && this.redirect(DeniedRoute);
      * }
      */
-    put?(): void;
+    put?(): any;
 
     /**
      * Endpoint functions must start by the name of the HTTP method case insensitive.
      * @example
-     * patch(): void {
+     * patch(): any {
      *     this.res.send("Hello");
      * }
      * 
@@ -105,21 +105,21 @@ export interface IController {
      * You can use $ for intercepting params.
      * 
      * @example
-     * patch_login(): void {
+     * patch_login(): any {
      *     this.auth.isLogged() && this.redirect(Home);
      * }
      * 
      * @example
-     * patch_image$authid(): void {
+     * patch_image$authid(): any {
      *     this.auth.isDenied() && this.redirect(DeniedRoute);
      * }
      */
-    patch?(): void;
+    patch?(): any;
 
     /**
      * Endpoint functions must start by the name of the HTTP method case insensitive.
      * @example
-     * delete(): void {
+     * delete(): any {
      *     this.res.send("Hello");
      * }
      * 
@@ -127,14 +127,14 @@ export interface IController {
      * You can use $ for intercepting params.
      * 
      * @example
-     * delete_login(): void {
+     * delete_login(): any {
      *     this.auth.isLogged() && this.redirect(Home);
      * }
      * 
      * @example
-     * delete_image$authid(): void {
+     * delete_image$authid(): any {
      *     this.auth.isDenied() && this.redirect(DeniedRoute);
      * }
      */
-    delete?(): void;
+    delete?(): any;
 }
