@@ -59,7 +59,7 @@ export default class HumpbackApp {
         }
 
 
-        (router || this.expressServer).use(router ? appFolder.name : "/", myRouter);
+        (router || this.expressServer).use(router ? "/" + appFolder.name : "/", myRouter);
 
         const modulesFolder = await appFolder.hasFolder("routes");
 
