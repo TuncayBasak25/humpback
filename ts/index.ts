@@ -1,3 +1,4 @@
+import bodyParser from "body-parser";
 import { IController } from "./interfaces/controller";
 
 import express, { Application, Router } from "express";
@@ -11,8 +12,13 @@ type HTTPMethod = "all" | "get" | "post" | "put" | "patch" | "delete";
 
 export default class HumpbackApp {
 
-    static async create({ port, callBack }: { port: string | number, callBack: () => void } = { port: process.env.PORT || 3000, callBack: () => console.log("Humpback app started.") }) {
+    static async create(
+        { port, callBack }:
+        { port: string | number, callBack: () => void } =
+        { port: process.env.PORT || 3000, callBack: () => console.log("Humpback app started.") }): Promise<HumpbackApp> {
         const app = new HumpbackApp();
+
+        app.expressServer.use(bodyParser.json());
 
         await app.setRouters();
 
@@ -26,6 +32,8 @@ export default class HumpbackApp {
                 (port as number)++;
             }
         }
+
+        return app;
     }
 
     public readonly expressServer: Application = express();

@@ -31,13 +31,18 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
+const body_parser_1 = __importDefault(require("body-parser"));
 const express_1 = __importStar(require("express"));
 const file_system_1 = require("file-system");
 class HumpbackApp {
     static create({ port, callBack } = { port: process.env.PORT || 3000, callBack: () => console.log("Humpback app started.") }) {
         return __awaiter(this, void 0, void 0, function* () {
             const app = new HumpbackApp();
+            app.expressServer.use(body_parser_1.default.json());
             yield app.setRouters();
             while (true) {
                 try {
@@ -48,6 +53,7 @@ class HumpbackApp {
                     port++;
                 }
             }
+            return app;
         });
     }
     constructor() {
