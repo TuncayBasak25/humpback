@@ -19,6 +19,7 @@ export default class HumpbackApp {
         const app = new HumpbackApp();
 
         app.expressServer.use(bodyParser.json());
+        app.expressServer.use(bodyParser.urlencoded({ extended: true }));
 
         await app.setRouters();
 

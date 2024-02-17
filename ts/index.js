@@ -43,6 +43,7 @@ class HumpbackApp {
         return __awaiter(this, void 0, void 0, function* () {
             const app = new HumpbackApp();
             app.expressServer.use(body_parser_1.default.json());
+            app.expressServer.use(body_parser_1.default.urlencoded({ extended: true }));
             yield app.setRouters();
             while (true) {
                 try {
