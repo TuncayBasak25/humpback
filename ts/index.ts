@@ -61,8 +61,6 @@ export default class HumpbackApp {
                 const method = match[0] as HTTPMethod;
                 const url = text.replace(match[0], "").replace(/\$/g, "/:").replace(/_/g, "/") || "/";
 
-
-                console.log(method, url);
                 myRouter[method](url, (...args: any[]) => new Controller(...args, protoName));
             }
         }
